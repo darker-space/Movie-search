@@ -1,0 +1,21 @@
+<%- include("initials/head1.ejs") %>
+    <title>Home Page</title>
+    <%- include("initials/head2.ejs") %>
+
+        <div class="jumbotron display-4 text-center">
+            <span class="display-2"> Welcome to search bar! </span>
+            <form action="/result/" method="GET">
+
+                <label class="form-group ">Enter here to search movies
+                <input type="text" name="search" class="form-control">
+                </label>
+
+                <button class="btn btn-dark text-light">Submit</button>
+
+            </form>
+        </div>
+
+
+        </div>
+
+        <%- include("initials/footer.ejs") %>

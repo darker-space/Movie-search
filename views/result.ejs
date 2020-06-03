@@ -1,0 +1,33 @@
+<%- include("initials/head1.ejs") %>
+    <title>Search result</title>
+    <%- include("initials/head2.ejs") %>
+
+        <button class="btn btn-lg text-light btn-warning" style="width:100%;">
+             <a href="/"> Return Back</a>
+          </button>
+        <div class="jumbotron  text-center border-danger border bg-light" style="margin-left:50px; margin-right:50px; margin-top: 100px;margin-bottom: 100px;">
+            <p class="display-2">The result for search
+                <span class="text-warning"><%= query %></span> is </p>
+
+            <div class="row bg-light text-light justify-content-around">
+                <% if(search!=undefined){search.forEach(function(movie) {%>
+
+                    <div class="col-3">
+                        <div class="card bg-info m-2 bg-info">
+                            <img class="card-img-top" src=<%=movie[ "Poster"]%>>
+                            <div class="card-title">
+                                <%= movie["Title"]%>
+
+                            </div>
+                        </div>
+                    </div>
+                    <%}) }%>
+
+            </div>
+
+        </div>
+        <button class="btn btn-lg text-light btn-warning" style="width:100%;">
+            <a href="/"> Return Back</a>
+         </button>
+
+        <%- include("initials/footer.ejs") %>
