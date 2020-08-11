@@ -3,22 +3,57 @@
     <%- include("initials/head2.ejs") %>
 
         <button class="btn btn-lg text-light btn-warning" style="width:100%;">
-             <a href="/"> Return Back</a>
+             <a href="/"> Home</a>
           </button>
-        <div class="jumbotron  text-center border-danger border bg-light" style="margin-left:50px; margin-right:50px; margin-top: 100px;margin-bottom: 100px;">
+        <!-- style="margin-left:50px; margin-right:50px; margin-top: 100px;margin-bottom: 100px;" -->
+        <div class="jumbotron  text-center border-danger border bg-light">
             <p class="display-2">The result for search
                 <span class="text-warning"><%= query %></span> is </p>
 
-            <div class="row bg-light text-light justify-content-around">
+            <div class="row  justify-content-around">
                 <% if(search!=undefined){search.forEach(function(movie) {%>
 
-                    <div class="col-3">
-                        <div class="card bg-info m-2 bg-info">
-                            <img class="card-img-top" src=<%=movie[ "Poster"]%>>
+                    <div class="col-lg-3 col-6">
+                        <div class="card shadow-lg rounded mb-2">
+                            <div class="card-header bg-dark">
+                                <%var x=movie["title"];%>
+                                   <h4> <a class=" text-light" href="https://www.imdb.com/find?q=<%= x%>">
+                                        <%= movie["title"]%>
+                                    </a></h4>
+                            </div>
+                            <% if(movie[ "poster_path"]){%>
+                            <img class="card-img-top" src="http://image.tmdb.org/t/p/w500/<%=movie[ "poster_path"]%>">
+                            <% } %> 
                             <div class="card-title">
-                                <%= movie["Title"]%>
+                                
 
                             </div>
+                            <div class="card-footer">
+                               <h4> <%= movie["title"]%></h4>
+                                   <span class="list-group-item text-warning"><b>Rating: <%=movie[ "vote_average"]%></b></span>
+                                  
+                                
+                            </div>
+                            <div class="card-body bg-light">
+                                 <span class="text-center"><h4>Overview</h4></span>
+                               <%var s= movie["overview"]; s=s.substring(0, 200)%>
+                               <%= s %>....
+                               
+                            </div>
+                            
+                        
+                            
+                            <div class="card-footer">
+                                   <span class="list-group-item bg-light text-dark">Release Date: <%=movie[ "release_date"]%></span>
+                                
+                            </div>
+                            <form action="/movie" method="GET">
+                                <input type="text" class="d-none" name="movie1" value="<%= movie[ "id"]%> ">
+
+                                <div class="row justify-content-around"><button class="col-11 btn btn-secondary border-2 border-dark rounded" type="submit">More Info!</button></div>
+                            </form>
+                            
+
                         </div>
                     </div>
                     <%}) }%>
@@ -26,8 +61,24 @@
             </div>
 
         </div>
-        <button class="btn btn-lg text-light btn-warning" style="width:100%;">
-            <a href="/"> Return Back</a>
-         </button>
+        <div class=" text-light bg-warning row justify-content-around my-2 py-2 between" style="width:100%;">
+            
+
+            <div class="col-4">
+            <form action="/result2" method="GET" >
+                <input type="text" name="q" class="d-none" value="<%= query %>">
+                <input type="text" name="page1" class="d-none" value="<%= Math.max(1,parseInt(page)-1)%>">
+                <button class="btn btn-info" style="width:100%;"> Prev page</button>
+            </form> 
+        </div>
+        <div class="col-4">
+            <form action="/result2" method="GET" >
+                <input type="text" name="q" class="d-none" value="<%= query %>">
+                <input type="text" name="page1" class="d-none" value="<%= parseInt(page)+1 %>">
+                <button class="btn btn-info" style="width:100%;"> Next page</button>
+            </form>
+        </div>
+           
+         </div>
 
         <%- include("initials/footer.ejs") %>

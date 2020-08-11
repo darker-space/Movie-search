@@ -1,0 +1,82 @@
+<%- include("initials/head1.ejs") %>
+    <title>Search result</title>
+    
+    <%- include("initials/head2.ejs") %>
+
+    
+        
+   
+                <% if(movie!=undefined){%>
+
+                   
+                            <div class="jumbotron text-center">
+                                <%var x=movie["title"];%>
+                                    <a class="display-1 " href="https://www.imdb.com/find?q=<%= x%>">
+                                        <%= movie["title"]%>
+                                    </a>
+                            </div>
+                            
+                        
+                            
+                            <div class="jumbotron">
+                                <div class="row" style="font-weight: 600;">
+                                    <% if(movie[ "poster_path"]){%>
+                                        <img class="col-4 img-fluid" style="max-height: 600px;" src="http://image.tmdb.org/t/p/w500/<%=movie[ "poster_path"]%>">
+                                        <% } %> 
+                                        <div class="col-7 text-center d-flex align-items-center ">
+                                            <div >
+                                                <h4> <%= movie["title"]%></h4>
+                                                <br>
+                                                <h4><div class="list-group-item  text-primary">
+                                                    <span class="text-danger">GENRES: </span>
+                                                    <%   movie["genres"].forEach(function(genre){%>
+                                                       <span class=""><%= genre["name"] %> </span> ,
+                                                    
+                                                   <% })%>.
+                                                    
+                                                    </div></h4>
+                                            <span class="text-center"><h4>Overview</h4></span>
+                                                <%var s= movie["overview"];%>
+                                                <%= s %>
+
+                                               <br>
+                                                   
+                                                    <br>
+                                                    <span class="list-group-item text-warning"><b>Rating: <%=movie[ "vote_average"]%></b></span>
+                                                    <br><br>
+                                               
+                                                    <span class="list-group-item bg-light text-dark">Release Date: <%=movie[ "release_date"]%></span>
+                                                 
+                                          
+                                            </div>
+                                            
+                                        </div>
+                                </div>
+                                 
+                               
+                            </div>
+                            
+                        
+                            <div class="jumbotron bg-dark text-center">
+                                <span class="text-light display-2 "><b>Trailers</b></span>
+                                <%   movie["videos"]["results"].forEach(function(vid){%>
+                                    <% if(vid["site"]=="YouTube") {%> 
+                                        <iframe width="100%" height="700px" src="https://www.youtube.com/embed/<%= vid["key"] %> ?controls=0&amp;start=7" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <span>
+                                            <h4 class="text-light"><%= vid["name"] %> </h4>
+                                        </span>
+                                        <br><br><br>
+                                    <% } %> 
+                                 
+                                <% })%>.
+                            </div>
+                            
+                            
+                            
+
+                    <% }%>
+
+            
+
+        
+        <%- include("initials/footer.ejs") %>

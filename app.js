@@ -20,23 +20,57 @@ app.get("/", (req, res) => {
 
 app.get("/result", (req, res1) => {
 
-    // res1.send("hello");
-    var query = req.query.search;
-    var url = "http://www.omdbapi.com/?apikey=thewdb&s=" + query;
-    console.log("query" + query);
+    var q = req.query.search;
+
+    var url="https://api.themoviedb.org/3/search/movie?api_key=c9702b2dc69b08065d111a09120db346&query="+q;
+    console.log(url);
     request(url, function(error, res, body) {
         if (!error && res.statusCode == 200) {
             var search = JSON.parse(body);
-            search = search["Search"];
             console.log(search);
-            res1.render("result", { query: query, search: search });
+            search = search["results"];
+           // console.log(search);
+            res1.render("result", { query: q, search: search,page:1 });
 
-            // res.send("done");
+        }
+    });
+
+});
+app.get("/result2", (req, res1) => {
+
+    var q = req.query.q;
+    var q2 =req.query.page1;
+    var url="https://api.themoviedb.org/3/search/movie?api_key=c9702b2dc69b08065d111a09120db346&query="+q+"&page="+q2;
+    console.log(url);
+    request(url, function(error, res, body) {
+        if (!error && res.statusCode == 200) {
+            var search = JSON.parse(body);
+            console.log(search);
+            search = search["results"];
+           // console.log(search);
+            res1.render("result", { query: q, search: search,page:q2 });
+
         }
     });
 
 });
 
+app.get("/movie", (req, res1) => {
+
+   
+    var q = req.query.movie1;
+    var url="https://api.themoviedb.org/3/movie/"+q+"?api_key=c9702b2dc69b08065d111a09120db346&append_to_response=videos";
+    console.log(url);
+    request(url, function(error, res, body) {
+        if (!error && res.statusCode == 200) {
+            var search = JSON.parse(body);
+            console.log(search);
+            res1.render("movie", {query: q, movie: search });
+
+        }
+    });
+
+});
 //lsiten
 
 app.listen(3000, function() {
