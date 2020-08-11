@@ -22,7 +22,7 @@ app.get("/result", (req, res1) => {
 
     var q = req.query.search;
 
-    var url="https://api.themoviedb.org/3/search/movie?api_key=c9702b2dc69b08065d111a09120db346&query="+q;
+    var url="https://api.themoviedb.org/3/search/movie?api_key=<key>&query="+q;
     console.log(url);
     request(url, function(error, res, body) {
         if (!error && res.statusCode == 200) {
@@ -40,7 +40,7 @@ app.get("/result2", (req, res1) => {
 
     var q = req.query.q;
     var q2 =req.query.page1;
-    var url="https://api.themoviedb.org/3/search/movie?api_key=c9702b2dc69b08065d111a09120db346&query="+q+"&page="+q2;
+    var url="https://api.themoviedb.org/3/search/movie?api_key=<key>&query="+q+"&page="+q2;
     console.log(url);
     request(url, function(error, res, body) {
         if (!error && res.statusCode == 200) {
@@ -59,7 +59,7 @@ app.get("/movie", (req, res1) => {
 
    
     var q = req.query.movie1;
-    var url="https://api.themoviedb.org/3/movie/"+q+"?api_key=c9702b2dc69b08065d111a09120db346&append_to_response=videos";
+    var url="https://api.themoviedb.org/3/movie/"+q+"?api_key=<key>&append_to_response=videos";
     console.log(url);
     request(url, function(error, res, body) {
         if (!error && res.statusCode == 200) {
